@@ -490,4 +490,5 @@ function friendlyError(code) {
     'auth/too-many-requests': 'Too many attempts. Try later.'
   };
   return map[code] || 'Something went wrong. Try again.';
-}
+  }
+  
