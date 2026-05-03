@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messenger DIY</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     AUTH SCREEN
+══════════════════════════════════════ -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo-icon">💬</div>
+      <h1>Messenger</h1>
+    </div>
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Sign In</button>
+      <button class="auth-tab" data-tab="register">Create Account</button>
+    </div>
+
+    <!-- Login Form -->
+    <div class="auth-form" id="login-form">
+      <div class="input-group">
+        <input type="email" id="login-email" placeholder="Email address" autocomplete="email" />
+      </div>
+      <div class="input-group">
+        <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password" />
+      </div>
+      <p id="auth-error"></p>
+      <button class="btn-primary" id="login-btn">Sign In</button>
+    </div>
+
+    <!-- Register Form -->
+    <div class="auth-form hidden" id="register-form">
+      <div class="input-group">
+        <input type="text" id="reg-name" placeholder="Your display name" autocomplete="name" />
+      </div>
+      <div class="input-group">
+        <input type="email" id="reg-email" placeholder="Email address" autocomplete="email" />
+      </div>
+      <div class="input-group">
+        <input type="password" id="reg-pass" placeholder="Password (min 6 chars)" autocomplete="new-password" />
+      </div>
+      <p id="auth-error"></p>
+      <button class="btn-primary" id="register-btn">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MAIN APP
+══════════════════════════════════════ -->
+<div id="app-screen" class="hidden">
+
+  <!-- ── Sidebar ── -->
+  <div class="sidebar">
+
+    <!-- Header -->
+    <div class="sidebar-header">
+      <div class="sidebar-top">
+        <h2>Chats</h2>
+        <button class="icon-btn" title="New Chat">✏️</button>
+      </div>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search conversations…" />
+      </div>
+    </div>
+
+    <!-- Logged-in user -->
+    <div class="sidebar-me">
+      <div id="me-avatar" class="avatar online">M</div>
+      <div class="me-info">
+        <div class="me-name" id="me-name">Me</div>
+        <div class="me-email" id="me-email">email@example.com</div>
+      </div>
+      <button class="btn-logout" id="logout-btn">Sign out</button>
+    </div>
+
+    <!-- Users / Conversations List -->
+    <div class="users-list" id="users-list">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <!-- ── Chat Area ── -->
+  <div class="chat-area">
+
+    <!-- Placeholder when no chat selected -->
+    <div class="chat-placeholder" id="chat-placeholder">
+      <div class="ph-icon">💬</div>
+      <h3>Your Messages</h3>
+      <p>Select a conversation to start chatting</p>
+    </div>
+
+    <!-- Chat Header (hidden until chat selected) -->
+    <div class="chat-header" id="chat-header" style="display:none">
+      <button class="back-btn" id="back-btn">←</button>
+      <div id="chat-avatar" class="avatar">U</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name" id="chat-name">User</div>
+        <div class="chat-header-status" id="chat-status">Active now</div>
+      </div>
+    </div>
+
+    <!-- Messages Container (hidden until chat selected) -->
+    <div class="messages-container" id="messages-container" style="display:none"></div>
+
+    <!-- Typing Indicator -->
+    <div id="typing-indicator" class="typing-indicator" style="display:none; margin: 0 16px 8px;">
+      <div class="typing-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="typing-text">typing…</span>
+    </div>
+
+    <!-- Input Area (hidden until chat selected) -->
+    <div class="chat-input-area" id="chat-input-area" style="display:none">
+      <div class="chat-input-row">
+        <textarea
+          id="msg-input"
+          placeholder="Aa"
+          rows="1"
+          autocomplete="off"
+        ></textarea>
+        <button class="send-btn" id="send-btn" title="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Toast notification -->
+<div id="toast"></div>
+
+<!-- Firebase + App scripts (ES modules) -->
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
